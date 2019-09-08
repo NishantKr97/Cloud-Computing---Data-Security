@@ -10,23 +10,48 @@ def get_ip_address():
 def get_subnet_mask(myIpAddress):
 	subnet = myIpAddress[:-3]
 	subnet = subnet + "000"
-	print("Your Subnet is : " + subnet)
+	return subnet
 
-def inputIPAddress(myIpAddress):
-	ipAdress = input("Enter the IP address to access Login Page : ")
-	
-	print("Your IP Address is : " + myIpAddress)
-	get_subnet_mask(myIpAddress)
-	print("Loading...")
-	for i in range(0, 100000000):
-		pass
-	# os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")
+def inputIPAddress():
+	ipAddress = input("Enter the IP address to access Login Page : ")
+	return ipAddress
 
+def inputPortAddress():
+	inputPort = input("Enter the Port No. to access Login Page : ")
+	return inputPort
+
+def checkAccess(myIpAddress, subnet, inputIP, inputPort):
+	myIpSubnet = inputIP[:-3]
+	mySubnet = subnet[:-3]
+	flag = 1
+	if mySubnet != myIpSubnet:
+		flag = 0
+	if int(inputPort) <= 1024 or int(inputPort) > 65535:
+		flag = 0
+
+	if flag == 1:
+		return True
+	else:
+		return False
 
 
 def main():
 	myIpAddress = get_ip_address() 
-	inputIPAddress(myIpAddress)
+	print("IP Address : " + myIpAddress)
+	subnet = get_subnet_mask(myIpAddress)
+	inputIP = inputIPAddress()
+	inputPort = inputPortAddress()
+	access = checkAccess(myIpAddress, subnet, inputIP, inputPort)
+	if access:
+		print("Loading...")
+		for i in range(0, 100000000):
+			pass
+		os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")
+	else:
+		print("Error signing in!!!")
+
+
 
 if __name__ == '__main__':
 	main()
+

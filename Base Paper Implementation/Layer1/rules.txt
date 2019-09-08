@@ -1,0 +1,76 @@
+Rule Set 1: 
+Responses to internal requests are allowed. In most firewall implementations, it
+is desirable to allow a response to an internal request for information. In dynamic or stateful
+firewalls, this is most easily accomplished by matching the incoming traffic to an outgoing
+request in a state table. In simple packet filtering, this can be accomplished with the follow-
+ing rule for the external filtering router. (Note that the network address for the destination
+ends with .0; some firewalls use a notation of .x instead.) Extreme caution should be used
+in deploying this rule, as some attacks use port assignments above the 1023 level. Most
+modern firewalls use stateful inspection filtering and make this concern obsolete.
+
+
+Rule Set 2: The firewall device is never accessible directly from the public network. If attack-
+ers can directly access the firewall, they may be able to modify or delete rules and allow
+unwanted traffic through. For the same reason, the firewall itself should never be allowed
+to access other network devices directly. If hackers compromise the firewall and then use its
+permissions to access other servers or clients, they may cause additional damage or mischief.
+The rules shown in Table 6-7 prohibit anyone from directly accessing the firewall, and pro-
+hibit the firewall from directly accessing any other devices. Note that this example is for the
+external filtering router/firewall only. Similar rules should be crafted for the internal router.
+Why are there separate rules for each IP address? The 10.10.10.1 address regulates external
+access to and by the firewall, while the 10.10.10.2 address regulates internal access. Not all
+attackers are outside the firewall!
+
+
+Rule Set 3: All traffic from the trusted network is allowed out. As a general rule it is wise
+not to restrict outbound traffic, unless separate routers and firewalls are configured to han-
+dle it, to avoid overloading the firewall. If an organization wants control over outbound
+traffic, it should use a separate filtering device. The rule shown in Table 6-8 allows internal
+communications out, and as such would be used on the outbound interface.
+
+
+Rule Set 4: The rule set for the Simple Mail Transport Protocol (SMTP) data is shown in
+Table 6-9. As shown, the packets governed by this rule are allowed to pass through the fire-
+wall, but are all routed to a well-configured SMTP gateway. It is important that e-mail traf-
+fic reach your e-mail server and only your e-mail server. Some attackers try to disguise dan-
+gerous packets as e-mail traffic to fool a firewall. If such packets can reach only the e-mail
+server, and the e-mail server has been properly configured, the rest of the network ought to
+be safe. Note that if the organization allows home access to an internal e-mail server, then it
+may wish to implement a second, separate server to handle the POP3 protocol that retrieves
+mail for e-mail clients like Outlook and Thunderbird. This is usually a low-risk operation,
+especially if e-mail encryption is in place. More challenging is the sending of e-mail using
+the SMTP protocol, a service attractive to spammers who may seek to hijack an outbound
+mail server.
+
+
+Rule Set 5: All Internet Control Message Protocol (ICMP) data should be denied. Pings, for-
+mally known as ICMP Echo requests, are used by internal systems administrators to ensure
+that clients and servers can communicate. There is virtually no legitimate use for ICMP out-
+side the network, except to test the perimeter routers. ICMP uses port 7 to request a
+response to a query (e.g., “Are you there?”) and can be the first indicator of a malicious
+attack. It’s best to make all directly connected networking devices “black holes” to external
+probes. Traceroute uses a variation on the ICMP Echo requests, so restricting this one port
+provides protection against two types of probes. Allowing internal users to use ICMP
+requires configuring two rules, as shown in Table 6-10.
+
+
+Rule Set 6: Telnet (terminal emulation) access to all internal servers from the public net-
+works should be blocked. Though not used much in Windows environments, Telnet is still
+useful to systems administrators on Unix/Linux systems. But the presence of external
+requests for Telnet services can indicate an attack. Allowing internal use of Telnet requires
+the same type of initial permission rule you use with ping. See Table 6-11. Note that this
+rule is unnecessary if internal permissions rules like those in rule set 2 is used.
+Rule Set 7: When Web services are offered outside the firewall, HTTP traffic (and HTTPS
+traffic) should be blocked from the internal networks via the use of some form of proxy
+access or DMZ architecture. With a Web server in the DMZ you simply allow HTTP to
+access the Web server, and use rule set 8, the cleanup rule (which will be described shortly),
+to prevent any other access. In order to keep the Web server inside the internal network,
+direct all HTTP requests to the proxy server and configure the internal filtering router/fire-
+wall only to allow the proxy server to access the internal Web server. The rule shown in
+Table 6-12 illustrates the first example.
+
+
+Rule Set 8: The cleanup rule. As a general practice in firewall rule construction, if a request
+for a service is not explicitly allowed by policy, that request should be denied by a rule. The
+rule shown in Table 6-15 implements this practice and blocks any requests that aren’t
+explicitly allowed by other rules.
