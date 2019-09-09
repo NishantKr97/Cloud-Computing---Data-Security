@@ -9,7 +9,8 @@ in deploying this rule, as some attacks use port assignments above the 1023 leve
 modern firewalls use stateful inspection filtering and make this concern obsolete.
 
 
-Rule Set 2: The firewall device is never accessible directly from the public network. If attack-
+Rule Set 2: 
+The firewall device is never accessible directly from the public network. If attack-
 ers can directly access the firewall, they may be able to modify or delete rules and allow
 unwanted traffic through. For the same reason, the firewall itself should never be allowed
 to access other network devices directly. If hackers compromise the firewall and then use its
@@ -22,14 +23,16 @@ access to and by the firewall, while the 10.10.10.2 address regulates internal a
 attackers are outside the firewall!
 
 
-Rule Set 3: All traffic from the trusted network is allowed out. As a general rule it is wise
+Rule Set 3: 
+All traffic from the trusted network is allowed out. As a general rule it is wise
 not to restrict outbound traffic, unless separate routers and firewalls are configured to han-
 dle it, to avoid overloading the firewall. If an organization wants control over outbound
 traffic, it should use a separate filtering device. The rule shown in Table 6-8 allows internal
 communications out, and as such would be used on the outbound interface.
 
 
-Rule Set 4: The rule set for the Simple Mail Transport Protocol (SMTP) data is shown in
+Rule Set 4: 
+The rule set for the Simple Mail Transport Protocol (SMTP) data is shown in
 Table 6-9. As shown, the packets governed by this rule are allowed to pass through the fire-
 wall, but are all routed to a well-configured SMTP gateway. It is important that e-mail traf-
 fic reach your e-mail server and only your e-mail server. Some attackers try to disguise dan-
@@ -43,7 +46,8 @@ the SMTP protocol, a service attractive to spammers who may seek to hijack an ou
 mail server.
 
 
-Rule Set 5: All Internet Control Message Protocol (ICMP) data should be denied. Pings, for-
+Rule Set 5: 
+All Internet Control Message Protocol (ICMP) data should be denied. Pings, for-
 mally known as ICMP Echo requests, are used by internal systems administrators to ensure
 that clients and servers can communicate. There is virtually no legitimate use for ICMP out-
 side the network, except to test the perimeter routers. ICMP uses port 7 to request a
@@ -54,7 +58,8 @@ provides protection against two types of probes. Allowing internal users to use 
 requires configuring two rules, as shown in Table 6-10.
 
 
-Rule Set 6: Telnet (terminal emulation) access to all internal servers from the public net-
+Rule Set 6: 
+Telnet (terminal emulation) access to all internal servers from the public net-
 works should be blocked. Though not used much in Windows environments, Telnet is still
 useful to systems administrators on Unix/Linux systems. But the presence of external
 requests for Telnet services can indicate an attack. Allowing internal use of Telnet requires
@@ -70,7 +75,8 @@ wall only to allow the proxy server to access the internal Web server. The rule 
 Table 6-12 illustrates the first example.
 
 
-Rule Set 8: The cleanup rule. As a general practice in firewall rule construction, if a request
+Rule Set 8: 
+The cleanup rule. As a general practice in firewall rule construction, if a request
 for a service is not explicitly allowed by policy, that request should be denied by a rule. The
 rule shown in Table 6-15 implements this practice and blocks any requests that aren’t
 explicitly allowed by other rules.
