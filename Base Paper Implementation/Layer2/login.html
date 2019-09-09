@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>particles.js</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://fonts.googleapis.com/css?family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- count particles -->
+<!-- <div class="count-particles">
+  <span class="js-count-particles">--</span> particles
+</div> -->
+
+<!-- particles.js container -->
+<div id="particles-js">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px; margin-top: 100px;margin-left:380px;position: absolute;">
+  
+    <div class="w3-center"><br>
+      <!-- <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span> -->
+      <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+    </div>
+
+    <form class="w3-container">
+      <div class="w3-section">
+        <label><b>Username</b></label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+        <label><b>Password</b></label>
+        <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
+        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+      </div>
+    </form>
+
+    <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <a href="home.html"><button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button></a>
+      <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+    </div>
+
+  </div>
+   
+</div>
+<!-- scripts -->
+<script src="../particles.js"></script>
+<script src="js/napp.js"></script>
+
+<!-- stats.js -->
+<script src="js/lib/stats.js"></script>
+<script>
+  var count_particles, stats, update;
+//   stats = new Stats;
+//   stats.setMode(0);
+//   stats.domElement.style.position = 'absolute';
+//   stats.domElement.style.left = '0px';
+//   stats.domElement.style.top = '0px';
+  document.body.appendChild(stats.domElement);
+  count_particles = document.querySelector('.js-count-particles');
+  update = function() {
+    stats.begin();
+    stats.end();
+    if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+      count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+    }
+    requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+</script>
+
+</body>
+</html>

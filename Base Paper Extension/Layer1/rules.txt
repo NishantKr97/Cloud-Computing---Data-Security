@@ -1,5 +1,7 @@
 Page No. 305
 
+Run Server : python3 -m http.server --cgi 8080
+
 Rule Set 1: 
 Responses to internal requests are allowed. In most firewall implementations, it
 is desirable to allow a response to an internal request for information. In dynamic or stateful

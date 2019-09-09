@@ -102,7 +102,8 @@ def main():
 		print("Loading...")
 		for i in range(0, 100000000):
 			pass
-		os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")		
+		# os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")
+		os.system("firefox http://0.0.0.0:8080/")
 	else:
 		print("Error signing in!!!")
 
