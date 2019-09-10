@@ -24,23 +24,25 @@
   
     <div class="w3-center"><br>
       <!-- <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">×</span> -->
-      <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+      <img src="images/boxer.jpeg" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
     </div>
 
     <form class="w3-container">
       <div class="w3-section">
         <label><b>Username</b></label>
-        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+        <input id="userName" class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
         <label><b>Password</b></label>
-        <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
-        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
-        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+        <input id="password" class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
+        <!-- <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button> -->
+        <!-- <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me -->
       </div>
     </form>
 
     <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <a href="coming_soon.html"></a>
+      <button onclick="loginValidate()" type="button" style="margin-left: 200px" class="w3-button w3-green">Login</button>
       <a href="home.html"><button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button></a>
-      <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+      <!-- <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span> -->
     </div>
 
   </div>
@@ -70,6 +72,24 @@
     requestAnimationFrame(update);
   };
   requestAnimationFrame(update);
+
+  function loginValidate(){
+    var userName = "admin";
+    var password = "admin";
+    var error = "Error signing in!!!"
+    var usrName = document.getElementById('userName').value;
+    var pwd = document.getElementById('password').value;
+     if(userName == usrName && password == pwd){
+      window.location.href = "coming_soon.html";
+     }else{
+          alert(error)
+     }
+
+    
+
+
+  }
+
 </script>
 
 </body>
