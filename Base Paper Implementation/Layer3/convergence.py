@@ -184,9 +184,9 @@ def convergent_encryption(plainText):
 	return sha_signature
 
 def main():
-	plainText = input("Enter the text to be Encrypted : \n")
+	plainText = input("Enter the text to be Encrypted : ")
 	cipherText = convergent_encryption(plainText)
-	print(cipherText)
+	print("The Encrypted text : " + cipherText)
 
 
 
