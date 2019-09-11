@@ -2,6 +2,9 @@ import netifaces as ni
 import socket
 import os
 
+# FIREWALL AUTHENTICATION
+
+
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -18,6 +21,7 @@ def inputIPAddress():
 
 def inputPortAddress():
 	inputPort = input("Enter the Port No. to access Login Page : ")
+	print("\n        ||\n        ||\n        ||\n        ||\n        ||\n        ||\n       \  /\n        \/\n")
 	return inputPort
 
 def checkAccess(myIpAddress, subnet, inputIP, inputPort):
@@ -36,19 +40,34 @@ def checkAccess(myIpAddress, subnet, inputIP, inputPort):
 
 
 def main():
-	myIpAddress = get_ip_address() 
-	print("IP Address : " + myIpAddress)
-	subnet = get_subnet_mask(myIpAddress)
-	inputIP = inputIPAddress()
-	inputPort = inputPortAddress()
-	access = checkAccess(myIpAddress, subnet, inputIP, inputPort)
-	if access:
-		print("Loading...")
+
+	rsa_key = input("Enter the RSA key : ")
+	print("\n        ||\n        ||\n        ||\n        ||\n        ||\n        ||\n       \  /\n        \/\n")
+	if(rsa_key == "8037427191231280"):
+		print(".......................................................................\n| Authorized Key -> Welcome to the Firewall Authentication Step!!!    |\n....................................................................... ")
+		myIpAddress = get_ip_address() 
 		for i in range(0, 100000000):
 			pass
-		os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")
+		print("\n_______________________________________________________________________\nValid IP Address : " + myIpAddress + "\n_______________________________________________________________________\n")
+		subnet = get_subnet_mask(myIpAddress)
+		inputIP = inputIPAddress()
+		inputPort = inputPortAddress()
+		access = checkAccess(myIpAddress, subnet, inputIP, inputPort)
+		if access:
+			print("\n.......................................................................\n| Authorized Login -> This may take some time.                        |\n| Loading...                                                          |")
+			for i in range(0, 100000000):
+				pass
+			print(".......................................................................")
+			for i in range(0, 10000000):
+				pass
+			os.system("firefox file:///home/nishantkr97/Documents/Projects/Cloud-Computing---Data-Security/Base%20Paper%20Implementation/Layer2/home.html")
+		else:
+			print("\n.......................................................................\n|                        Error signing in!!!                          |\n....................................................................... ")
 	else:
-		print("Error signing in!!!")
+		print("Invalid RSA Key!!!")
+	
+
+
 
 
 
