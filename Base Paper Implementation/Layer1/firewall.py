@@ -11,9 +11,10 @@ def get_ip_address():
     return s.getsockname()[0]
 
 def get_subnet_mask(myIpAddress):
-	subnet = myIpAddress[:-3]
-	subnet = subnet + "000"
-	return subnet
+	# subnet = myIpAddress[:-3]
+	# subnet = subnet + "000"
+	# return subnet
+	return myIpAddress
 
 def inputIPAddress():
 	ipAddress = input("Enter the IP address to access Login Page : ")
@@ -25,8 +26,34 @@ def inputPortAddress():
 	return inputPort
 
 def checkAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
+	l1 = len(subnet)
+	l2 = len(inputIP)
+
+	# print (subnet, inputIP, l1, l2)
+
+	x = l1 - 1
+	j = 0
+	# print (l2)
+
+	while subnet[x] != '.':
+		x -= 1
+	# print (x)
+	# for x in range(l1 - 1, 0, -1):
+	# 	if subnet[x] == '.':
+	# 		print (x)
+	# 		break
+	for j in range(l2 - 1, 0, -1):
+		if inputIP[j] == '.':
+			# print (j)
+			break
+	myIpSubnet = inputIP[:j]
+	mySubnet = subnet[:x]
+
+
+	# myIpSubnet = inputIP[:-3]
+	# mySubnet = subnet[:-3]
+
+	# print(mySubnet, myIpSubnet)
 	flag = 1
 	if mySubnet != myIpSubnet:
 		flag = 0
