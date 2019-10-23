@@ -87,7 +87,8 @@ def main():
 			print(".......................................................................")
 			for i in range(0, 10000000):
 				pass
-			os.system("firefox file:///home/nishantkr97/Documents/Projects/Cloud-Computing---Data-Security/Base%20Paper%20Implementation/Layer2/home.html")
+			# os.system("firefox file:///home/nishantkr97/Documents/Projects/Cloud-Computing---Data-Security/Base%20Paper%20Implementation/Layer2/home.html")
+			os.system("python3 intrusion_test.py")			
 		else:
 			print("\n.......................................................................\n|                        Error signing in!!!                          |\n....................................................................... ")
 	else:

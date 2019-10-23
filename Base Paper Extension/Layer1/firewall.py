@@ -2,15 +2,19 @@ import netifaces as ni
 import socket
 import os
 
+# FIREWALL AUTHENTICATION
+
+
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
 def get_subnet_mask(myIpAddress):
-	subnet = myIpAddress[:-3]
-	subnet = subnet + "000"
-	return subnet
+	# subnet = myIpAddress[:-3]
+	# subnet = subnet + "000"
+	# return subnet
+	return myIpAddress
 
 def inputIPAddress():
 	ipAddress = input("Enter the IP address to access Login Page : ")
@@ -18,94 +22,79 @@ def inputIPAddress():
 
 def inputPortAddress():
 	inputPort = input("Enter the Port No. to access Login Page : ")
+	print("\n        ||\n        ||\n        ||\n        ||\n        ||\n        ||\n       \  /\n        \/\n")
 	return inputPort
 
-def checkSubnetAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
+def checkAccess(myIpAddress, subnet, inputIP, inputPort):
+	l1 = len(subnet)
+	l2 = len(inputIP)
+
+	# print (subnet, inputIP, l1, l2)
+
+	x = l1 - 1
+	j = 0
+	# print (l2)
+
+	while subnet[x] != '.':
+		x -= 1
+	# print (x)
+	# for x in range(l1 - 1, 0, -1):
+	# 	if subnet[x] == '.':
+	# 		print (x)
+	# 		break
+	for j in range(l2 - 1, 0, -1):
+		if inputIP[j] == '.':
+			# print (j)
+			break
+	myIpSubnet = inputIP[:j]
+	mySubnet = subnet[:x]
+
+
+	# myIpSubnet = inputIP[:-3]
+	# mySubnet = subnet[:-3]
+
+	# print(mySubnet, myIpSubnet)
 	flag = 1
 	if mySubnet != myIpSubnet:
 		flag = 0
-
-	return flag
-
-def checkPublicNetworkAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpClass = inputIP[0:1]
-	mySubnet = subnet[:-3]
-	flag = 1
-	if myIpClass == 0:
-		flag = 0
-	
-	return flag
-
-
-def checkPortAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
-	flag = 1
 	if int(inputPort) <= 1024 or int(inputPort) > 65535:
 		flag = 0
 
-	return flag	
+	if flag == 1:
+		return True
+	else:
+		return False
 
-def checkSMTPAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
-	flag = 0
-	if inputPort == 25:
-		flag = 1
-
-	return flag 
-
-def checkICMPAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
-	flag = 0
-	if inputPort == 7:
-		flag = 1
-
-	return flag 	
-
-def checkTelnetAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
-	flag = 0
-	if inputPort == 23:
-		flag = 1
-
-	return flag 
-
-def checkHTTPAccess(myIpAddress, subnet, inputIP, inputPort):
-	myIpSubnet = inputIP[:-3]
-	mySubnet = subnet[:-3]
-	flag = 0
-	if inputPort == 80:
-		flag = 1
-
-	return flag 
 
 def main():
-	myIpAddress = get_ip_address() 
-	print("IP Address : " + myIpAddress)
-	subnet = get_subnet_mask(myIpAddress)
-	inputIP = inputIPAddress()
-	inputPort = inputPortAddress()
-	accessRule1 = checkSubnetAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule2 = checkPublicNetworkAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule3 = checkPortAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule4 = checkSMTPAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule5 = checkICMPAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule6 = checkTelnetAccess(myIpAddress, subnet, inputIP, inputPort)
-	accessRule7 = checkHTTPAccess(myIpAddress, subnet, inputIP, inputPort)
 
-	if (accessRule1 and accessRule2 and accessRule3) or accessRule4 or accessRule5 or accessRule6 or accessRule7:
-		print("Loading...")
+	rsa_key = input("Enter the RSA key : ")
+	print("\n        ||\n        ||\n        ||\n        ||\n        ||\n        ||\n       \  /\n        \/\n")
+	if(rsa_key == "8037427191231280"):
+		print(".......................................................................\n| Authorized Key -> Welcome to the Firewall Authentication Step!!!    |\n....................................................................... ")
+		myIpAddress = get_ip_address() 
 		for i in range(0, 100000000):
 			pass
-		# os.system("firefox https://ieeexplore.ieee.org/abstract/document/7299312")
-		os.system("firefox http://0.0.0.0:8080/")
+		print("\n_______________________________________________________________________\nValid IP Address : " + myIpAddress + "\n_______________________________________________________________________\n")
+		subnet = get_subnet_mask(myIpAddress)
+		inputIP = inputIPAddress()
+		inputPort = inputPortAddress()
+		access = checkAccess(myIpAddress, subnet, inputIP, inputPort)
+		if access:
+			print("\n.......................................................................\n| Authorized Login -> This may take some time.                        |\n| Loading...                                                          |")
+			for i in range(0, 100000000):
+				pass
+			print(".......................................................................")
+			for i in range(0, 10000000):
+				pass
+			# os.system("firefox file:///home/nishantkr97/Documents/Projects/Cloud-Computing---Data-Security/Base%20Paper%20Implementation/Layer2/home.html")
+			os.system("python intrusion_test.py")			
+		else:
+			print("\n.......................................................................\n|                        Error signing in!!!                          |\n....................................................................... ")
 	else:
-		print("Error signing in!!!")
+		print("Invalid RSA Key!!!")
+	
+
 
 
 
